@@ -1,26 +1,24 @@
 /* eslint-disable no-console */
-import 'tsconfig-paths/register';
+import config from 'config';
 
 import app from './app';
 
-const PORT = process.env.PORT || 3000;
+// ✅ Explicitly define types for config values
+const HOST: string = config.get<string>('listen.host');
+const PORT: number = config.get<number>('listen.port');
+const APP_NAME: string = config.get<string>('appName');
 
-const server = app.listen(PORT, () => {
-  console.log(`🚀 Server running on http://localhost:${PORT}`);
+const server = app.listen(PORT, HOST, () => {
+  console.log(`🚀 ${APP_NAME} is running on http://${HOST}:${PORT}`);
 });
 
 // Graceful Shutdown Handling
 const shutdown = async (signal: string): Promise<void> => {
-  console.log(`${signal} received: closing server and resources`);
+  console.log(`${signal} received: closing server`);
   await new Promise((resolve) => server.close(resolve));
+  console.log('Server closed. Exiting process.');
   process.exit(0);
 };
 
-// ✅ Corrected `process.on()` usage to avoid ESLint errors
-process.on('SIGTERM', () => {
-  void shutdown('SIGTERM');
-});
-
-process.on('SIGINT', () => {
-  void shutdown('SIGINT');
-});
+process.on('SIGTERM', () => void shutdown('SIGTERM'));
+process.on('SIGINT', () => void shutdown('SIGINT'));

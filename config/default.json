@@ -1,0 +1,12 @@
+{
+  "appName": "agora-api",
+  "version": "v1.0",
+  "listen": {
+    "host": "0.0.0.0",
+    "port": 3000
+  },
+  "cors": {
+    "origins": "*",
+    "credentials": false
+  }
+}
