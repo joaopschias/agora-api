@@ -14,10 +14,16 @@ export default [
     files: ["**/*.{js,mjs,cjs,ts}"],
     languageOptions: {
       globals: globals.node,
+      parserOptions: {
+        project: "./tsconfig.json",
+        tsconfigRootDir: process.cwd(),
+        ecmaVersion: "latest"
+      }
     },
   },
   pluginJs.configs.recommended,
   ...tseslint.configs.recommended,
+  ...tseslint.configs.recommendedTypeChecked,
   prettier,
   {
     plugins: {
@@ -41,20 +47,46 @@ export default [
       "import/order": ["error", { "alphabetize": { "order": "asc", "caseInsensitive": true } }],
       "import/newline-after-import": "error",
       "import/no-duplicates": "error",
+      "import/prefer-default-export": "off",
+      "import/extensions": "off",
 
       // 💡 Security Best Practices
       "security/detect-object-injection": "warn",
       "security/detect-non-literal-fs-filename": "warn",
 
       // 💡 TypeScript Best Practices
-      "@typescript-eslint/no-unused-vars": ["error", { "argsIgnorePattern": "^_" }],
+      "@typescript-eslint/no-unused-vars": ["error", { "argsIgnorePattern": "^_", "ignoreRestSiblings": true }],
       "@typescript-eslint/explicit-function-return-type": ["warn", { "allowExpressions": true }],
+      "@typescript-eslint/no-redundant-type-constituents": "off",
+      "@typescript-eslint/no-unsafe-enum-comparison": "off",
+      "@typescript-eslint/no-misused-promises": "error",
+      "@typescript-eslint/no-explicit-any": "error",
+      "@typescript-eslint/no-unsafe-return": "error",
+      "@typescript-eslint/no-unsafe-call": "error",
+      "@typescript-eslint/no-unsafe-argument": "error",
+      "@typescript-eslint/no-unsafe-member-access": "error",
+      "@typescript-eslint/no-unsafe-assignment": "warn",
+      "@typescript-eslint/ban-ts-comment": "error",
+      "@typescript-eslint/no-empty-interface": "error",
+      "@typescript-eslint/no-shadow": ["error"],
+      "@typescript-eslint/no-useless-constructor": ["error"],
 
       // 🔥 Extra Spaces & New Line Rules
       "no-multiple-empty-lines": ["error", { "max": 1, "maxEOF": 0, "maxBOF": 0 }], // Prevent multiple empty lines
       "no-trailing-spaces": "error", // Prevent spaces at the end of lines
       "spaced-comment": ["error", "always", { "markers": ["/"] }], // Enforce spacing in comments
-      "no-irregular-whitespace": "error" // Disallow irregular spaces that cause issues
+      "no-irregular-whitespace": "error", // Disallow irregular spaces that cause issues
+
+      // 💡 Code Quality
+      "no-useless-constructor": "off",
+      "lines-between-class-members": "off",
+      "no-shadow": "off",
+      "no-restricted-syntax": ["error", "ForInStatement", "LabeledStatement", "WithStatement"],
+      "no-underscore-dangle": "off",
+      "class-methods-use-this": "off",
+      "no-non-null-assertion": "off",
+      "no-empty-function": "off",
+      "no-console": ["error"],
     },
   },
 ];
