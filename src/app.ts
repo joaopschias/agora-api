@@ -1,4 +1,5 @@
 import { corsMiddleware } from '@middleware/cors';
+import { errorHandler } from '@middleware/errorHandler';
 import { enforceJsonResponse } from '@middleware/jsonResponse';
 import { loggerMiddleware } from '@middleware/loggerMiddleware';
 import { notFoundHandler } from '@middleware/notFound';
@@ -18,7 +19,8 @@ app.use(corsMiddleware);
 app.use(express.json());
 app.use(loggerMiddleware(logger));
 app.use(enforceJsonResponse);
-app.use('/api', routes);
 app.use(notFoundHandler);
+app.use(errorHandler(logger));
+app.use('/api', routes);
 
 export default app;
