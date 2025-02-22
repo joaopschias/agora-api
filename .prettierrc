@@ -1,0 +1,19 @@
+{
+  "semi": true,
+  "singleQuote": true,
+  "printWidth": 100,
+  "tabWidth": 2,
+  "trailingComma": "es5",
+  "endOfLine": "auto",
+  "arrowParens": "always",
+  "bracketSpacing": true,
+  "overrides": [
+    {
+      "files": "*.json",
+      "options": { "printWidth": 200 }
+    }
+  ],
+  "plugins": ["@trivago/prettier-plugin-sort-imports"],
+  "importOrder": ["^@?\\w", "^[./]"],
+  "importOrderSeparation": true
+}
