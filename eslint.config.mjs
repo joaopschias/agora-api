@@ -38,8 +38,6 @@ export default [
       "prettier/prettier": "error",
 
       // 💡 Import Sorting & Unused Imports
-      "simple-import-sort/imports": "error",
-      "simple-import-sort/exports": "error",
       "unused-imports/no-unused-imports": "error",
       "unused-imports/no-unused-vars": ["warn", { "vars": "all", "varsIgnorePattern": "^_", "argsIgnorePattern": "^_" }],
 

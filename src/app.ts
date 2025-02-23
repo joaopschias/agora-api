@@ -8,19 +8,23 @@ import { Logger } from '@utils/logger';
 import config from 'config';
 import express from 'express';
 
-const app = express();
 const logger = Logger.createLoggerInstance(
   config.get('logger'),
   config.get('appName'),
   config.get('version')
 );
 
+const app = express();
+
 app.use(corsMiddleware);
 app.use(express.json());
-app.use(loggerMiddleware(logger));
 app.use(enforceJsonResponse);
-app.use(notFoundHandler);
-app.use(errorHandler(logger));
+app.use(loggerMiddleware(logger));
+
 app.use('/api', routes);
+
+app.use(notFoundHandler);
+
+app.use(errorHandler(logger));
 
 export default app;
