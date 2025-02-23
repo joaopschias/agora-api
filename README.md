@@ -64,5 +64,76 @@ git commit -am "your message"
 
 ---
 
-Happy coding! 🚀
+## 🐳 Running with Docker
 
+To run the project using Docker, follow these steps:
+
+We use this method to separate concerns between the **database** and the **application** itself. This allows the MySQL database to run in a container while developing the application locally, enabling live reload for faster development cycles. This approach provides **flexibility** and **efficiency** during development.
+
+> **Note:** If you are using an older version of Docker (before version **20.x** or without the **Docker Compose plugin**), the command `docker compose` may not work. In that case, use `docker-compose` instead. Ensure your Docker version is **up-to-date** to avoid compatibility issues.
+
+### **1️⃣ Start MySQL using Docker Compose**
+```sh
+docker compose up -d agora-mysql
+```
+
+### **2️⃣ Run the API Locally with Docker MySQL**
+Ensure your **.env** file has the correct database connection settings, then start the server:
+```sh
+yarn dev
+```
+
+### **3️⃣ Start All Services (API + MySQL) using Docker**
+#### Development Mode:
+```sh
+docker compose --profile dev up -d
+```
+
+#### Production Mode:
+```sh
+docker compose --profile prod up -d
+```
+
+### **4️⃣ Stop & Remove Containers**
+#### Stop & Remove Dev Containers:
+```sh
+docker compose --profile dev down
+```
+#### Stop & Remove Prod Containers:
+```sh
+docker compose --profile prod down
+```
+
+### **5️⃣ Checking Running Containers**
+```sh
+docker ps
+```
+
+### **6️⃣ Viewing Logs**
+#### View API Logs:
+```sh
+docker logs agora-api-dev -f
+```
+#### View Database Logs:
+```sh
+docker logs agora-mysql -f
+```
+
+---
+
+## 🎯 API Endpoints
+
+### **Health Check**
+```sh
+curl -i http://localhost:3000/api/health
+```
+
+### **Test Database Connection**
+```sh
+curl -i http://localhost:3000/api/db-check
+```
+
+
+---
+
+Happy coding! 🚀
