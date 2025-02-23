@@ -11,7 +11,6 @@ if (!DB_HOST || !DB_PORT || !DB_USER || !DB_PASSWORD || !DB_NAME) {
   throw new Error('❌ Missing database environment variables!');
 }
 
-// ✅ Create Sequelize instance with MySQL connection
 const sequelize = new Sequelize({
   database: DB_NAME,
   username: DB_USER,

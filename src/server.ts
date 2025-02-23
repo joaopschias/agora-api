@@ -4,18 +4,16 @@ import config from 'config';
 
 import app from './app';
 
-// ✅ Fetch values from `config/`
 const HOST: string = config.get<string>('listen.host');
 const PORT: number = config.get<number>('listen.port');
 const APP_NAME: string = config.get<string>('appName');
 const APP_VERSION: string = config.get<string>('version');
 
-// ✅ Initialize Logger (Following `config/`)
 const logger = Logger.createLoggerInstance(config.get('logger'), APP_NAME, APP_VERSION);
 
 const startServer = async (): Promise<void> => {
   try {
-    await testDBConnection(); // ✅ Ensure DB is running before starting API
+    await testDBConnection();
 
     const server = app.listen(PORT, HOST, () => {
       logger.info(`🚀 ${APP_NAME} is running on http://${HOST}:${PORT}`);

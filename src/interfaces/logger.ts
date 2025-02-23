@@ -6,7 +6,7 @@ interface ILogger {
 }
 
 export interface ILoggerConfig {
-  level: 'error' | 'warn' | 'info' | 'debug'; // ✅ Restrict level values to specific strings
+  level: 'error' | 'warn' | 'info' | 'debug';
 }
 
 export default ILogger;
