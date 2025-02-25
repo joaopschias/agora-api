@@ -1,7 +1,7 @@
 services:
-  mysql:
-    image: mysql:8
-    container_name: agora-mysql
+  agora-database:
+    image: mariadb:latest
+    container_name: agora-database
     restart: on-failure
     environment:
       MYSQL_ROOT_PASSWORD: root
@@ -11,7 +11,7 @@ services:
     ports:
       - "3306:3306"
     volumes:
-      - mysql-data:/var/lib/mysql
+      - database-data:/var/lib/mysql
     healthcheck:
       test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
       interval: 10s
@@ -26,7 +26,7 @@ services:
     container_name: agora-api-dev
     restart: on-failure
     depends_on:
-      mysql:
+      agora-database:
         condition: service_healthy
     env_file:
       - .env
@@ -47,7 +47,7 @@ services:
     container_name: agora-api-prod
     restart: on-failure
     depends_on:
-      mysql:
+      agora-database:
         condition: service_healthy
     env_file:
       - .env.prod
@@ -58,4 +58,4 @@ services:
     command: ["node", "dist/src/server.js"]
 
 volumes:
-  mysql-data:
+  database-data:

@@ -1,6 +1,5 @@
 /* eslint-disable no-console */
 import dotenv from 'dotenv';
-import 'reflect-metadata';
 import { Sequelize } from 'sequelize-typescript';
 
 dotenv.config();
