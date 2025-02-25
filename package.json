@@ -12,13 +12,11 @@
     "mask-deep": "^3.0.7",
     "mysql2": "^3.12.0",
     "reflect-metadata": "^0.2.2",
-    "sequelize": "^6.37.5",
-    "sequelize-typescript": "^2.1.6",
+    "typeorm": "^0.3.20",
     "winston": "^3.17.0"
   },
   "devDependencies": {
     "@eslint/js": "^9.21.0",
-    "@trivago/prettier-plugin-sort-imports": "^5.2.2",
     "@types/config": "^3.3.5",
     "@types/cors": "^2.8.17",
     "@types/dotenv": "^8.2.3",
@@ -26,7 +24,6 @@
     "@types/lodash": "^4.17.15",
     "@types/node": "^22.13.5",
     "@types/reflect-metadata": "^0.1.0",
-    "@types/sequelize": "^4.28.20",
     "eslint": "^9.21.0",
     "eslint-config-prettier": "^10.0.1",
     "eslint-plugin-import": "^2.31.0",

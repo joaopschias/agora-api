@@ -12,8 +12,5 @@
       "files": "*.json",
       "options": { "printWidth": 200 }
     }
-  ],
-  "plugins": ["@trivago/prettier-plugin-sort-imports"],
-  "importOrder": ["^@?\\w", "^[./]"],
-  "importOrderSeparation": true
+  ]
 }

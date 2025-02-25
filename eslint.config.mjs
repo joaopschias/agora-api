@@ -34,15 +34,15 @@ export default [
       security: security,
     },
     rules: {
-      // 💡 Prettier Rules
       "prettier/prettier": "error",
 
       // 💡 Import Sorting & Unused Imports
+      "simple-import-sort/imports": "error",
+      "simple-import-sort/exports": "error",
       "unused-imports/no-unused-imports": "error",
       "unused-imports/no-unused-vars": ["warn", { "vars": "all", "varsIgnorePattern": "^_", "argsIgnorePattern": "^_" }],
 
       // 💡 Import Best Practices
-      "import/order": ["error", { "alphabetize": { "order": "asc", "caseInsensitive": true } }],
       "import/newline-after-import": "error",
       "import/no-duplicates": "error",
       "import/prefer-default-export": "off",

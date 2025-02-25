@@ -1,4 +1,4 @@
-import { testDBConnection } from '@infra/database';
+import { AppDataSource } from '@infra/database/config';
 import { Logger } from '@utils/logger';
 import config from 'config';
 
@@ -13,7 +13,8 @@ const logger = Logger.createLoggerInstance(config.get('logger'), APP_NAME, APP_V
 
 const startServer = async (): Promise<void> => {
   try {
-    await testDBConnection();
+    await AppDataSource.initialize();
+    logger.info('✅ Database connection established successfully!');
 
     const server = app.listen(PORT, HOST, () => {
       logger.info(`🚀 ${APP_NAME} is running on http://${HOST}:${PORT}`);
@@ -23,6 +24,7 @@ const startServer = async (): Promise<void> => {
     const shutdown = async (signal: string): Promise<void> => {
       logger.warn(`${signal} received: closing server`);
       await new Promise((resolve) => server.close(resolve));
+      await AppDataSource.destroy();
       logger.info('Server closed. Exiting process.');
       process.exit(0);
     };
