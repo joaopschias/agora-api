@@ -50,6 +50,7 @@
     "lint:check": "eslint 'src/**/*.{ts,tsx}'",
     "lint:fix": "eslint 'src/**/*.{ts,tsx}' --fix",
     "format:check": "prettier --check 'src/**/*.{ts,tsx}' 'package.json' 'tsconfig.json'",
-    "format:fix": "prettier --write 'src/**/*.{ts,tsx}' 'package.json' 'tsconfig.json'"
+    "format:fix": "prettier --write 'src/**/*.{ts,tsx}' 'package.json' 'tsconfig.json'",
+    "typeorm": "typeorm-ts-node-commonjs -d src/infra/database/config.ts"
   }
 }

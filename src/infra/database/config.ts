@@ -19,7 +19,7 @@ export const AppDataSource = new DataSource({
   database: DB_NAME,
   synchronize: true,
   logging: process.env.NODE_ENV === 'development',
-  entities: [path.join(__dirname, '../../modules/**/entities/*.ts')],
+  entities: [path.join(__dirname, '../../modules/**/entity/*.ts')],
   migrations: [path.join(__dirname, './migrations/*.ts')],
   subscribers: [path.join(__dirname, './subscribers/*.ts')],
 });
