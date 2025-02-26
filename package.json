@@ -4,6 +4,7 @@
   "main": "index.js",
   "license": "MIT",
   "dependencies": {
+    "bcryptjs": "^3.0.2",
     "config": "^3.3.12",
     "cors": "^2.8.5",
     "dotenv": "^16.4.7",
@@ -13,10 +14,13 @@
     "mysql2": "^3.12.0",
     "reflect-metadata": "^0.2.2",
     "typeorm": "^0.3.20",
+    "typeorm-extension": "^3.6.3",
     "winston": "^3.17.0"
   },
   "devDependencies": {
     "@eslint/js": "^9.21.0",
+    "@faker-js/faker": "^9.5.0",
+    "@types/bcryptjs": "^2.4.6",
     "@types/config": "^3.3.5",
     "@types/cors": "^2.8.17",
     "@types/dotenv": "^8.2.3",
@@ -51,6 +55,8 @@
     "lint:fix": "eslint 'src/**/*.{ts,tsx}' --fix",
     "format:check": "prettier --check 'src/**/*.{ts,tsx}' 'package.json' 'tsconfig.json'",
     "format:fix": "prettier --write 'src/**/*.{ts,tsx}' 'package.json' 'tsconfig.json'",
-    "typeorm": "typeorm-ts-node-commonjs -d src/infra/database/config.ts"
+    "typeorm": "typeorm-ts-node-commonjs -d src/infra/database/config.ts",
+    "seed:run": "ts-node -r tsconfig-paths/register ./node_modules/typeorm-extension/bin/cli.cjs seed:run -d src/infra/database/config.ts",
+    "seed:create": "ts-node -r tsconfig-paths/register ./node_modules/typeorm-extension/bin/cli.cjs seed:create -d src/infra/database/config.ts"
   }
 }
