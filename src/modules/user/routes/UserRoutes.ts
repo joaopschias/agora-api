@@ -11,6 +11,10 @@ import { Request, Response, Router } from 'express';
 const router = Router();
 const userController = new UserController();
 
+router.get('/', async (req: Request, res: Response) => {
+  await userController.all(req, res);
+});
+
 router.post('/', createUserValidation, validateRequest, async (req: Request, res: Response) => {
   await userController.create(req, res);
 });

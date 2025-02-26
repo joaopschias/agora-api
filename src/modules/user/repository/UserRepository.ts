@@ -19,6 +19,15 @@ export class UserRepository implements IUserRepository {
   }
 
   /**
+   * Retrieves all users from the database.
+   *
+   * @returns {Promise<User[]>} - A list of all users.
+   */
+  async findAll(): Promise<User[]> {
+    return await this.repo.find();
+  }
+
+  /**
    * Creates a new user record in the database.
    *
    * @param {Partial<User>} user - The user data to be stored.
