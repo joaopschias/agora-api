@@ -4,6 +4,7 @@ import {
   createUserValidation,
   deleteUserValidation,
   getUserValidation,
+  updateUserValidation,
 } from '@modules/user/validation/UserValidation';
 import { Request, Response, Router } from 'express';
 
@@ -18,7 +19,7 @@ router.get('/:id', getUserValidation, validateRequest, async (req: Request, res:
   await userController.getById(req, res);
 });
 
-router.put('/:id', async (req: Request, res: Response) => {
+router.patch('/:id', updateUserValidation, validateRequest, async (req: Request, res: Response) => {
   await userController.update(req, res);
 });
 

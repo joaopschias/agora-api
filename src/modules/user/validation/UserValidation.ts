@@ -1,4 +1,5 @@
 import { UserRepository } from '@modules/user/repository/UserRepository';
+import { Request } from 'express';
 import { body, param } from 'express-validator';
 
 /**
@@ -30,6 +31,36 @@ export const createUserValidation = [
  */
 export const getUserValidation = [
   param('id').isInt({ min: 1 }).withMessage('User ID must be a valid number'),
+];
+
+/**
+ * Validation rules for updating a user.
+ */
+export const updateUserValidation = [
+  param('id').isInt({ min: 1 }).withMessage('User ID must be a positive integer'),
+
+  body('name').optional().isString().notEmpty().withMessage('Name cannot be empty'),
+
+  body('email')
+    .optional()
+    .isString()
+    .isEmail()
+    .withMessage('Invalid email format')
+    .custom(async (email: string, { req }) => {
+      const request = req as Request; // ✅ Explicitly cast req to Request
+
+      if (!request.params.id) {
+        // ✅ Now TypeScript knows params exists
+        return Promise.reject(new Error('Invalid request: Missing user ID'));
+      }
+
+      const userRepository = new UserRepository();
+      const existingUser = await userRepository.findByEmail(email);
+
+      if (existingUser && existingUser.id !== parseInt(request.params.id, 10)) {
+        return Promise.reject(new Error('Email is already in use by another user'));
+      }
+    }),
 ];
 
 /**

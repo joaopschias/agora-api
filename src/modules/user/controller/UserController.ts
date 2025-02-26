@@ -56,6 +56,10 @@ export class UserController {
   async update(req: Request, res: Response): Promise<Response> {
     try {
       const userId = parseInt(req.params.id, 10);
+      const user = await this.userService.getUserById(userId);
+      if (!user) {
+        return res.status(404).json({ message: 'User not found' });
+      }
       const updateData = req.body as UpdateUserDTO;
       const updatedUser = await this.userService.updateUser(userId, updateData);
       return res.status(200).json(updatedUser);
