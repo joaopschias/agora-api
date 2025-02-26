@@ -1,12 +1,16 @@
 import { validateRequest } from '@middleware/validationRequest';
 import { UserController } from '@modules/user/controller/UserController';
-import { deleteUserValidation, getUserValidation } from '@modules/user/validation/UserValidation';
+import {
+  createUserValidation,
+  deleteUserValidation,
+  getUserValidation,
+} from '@modules/user/validation/UserValidation';
 import { Request, Response, Router } from 'express';
 
 const router = Router();
 const userController = new UserController();
 
-router.post('/', async (req: Request, res: Response) => {
+router.post('/', createUserValidation, validateRequest, async (req: Request, res: Response) => {
   await userController.create(req, res);
 });
 
