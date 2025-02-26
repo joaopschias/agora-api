@@ -1,1 +1,1 @@
-yarn lint:check && yarn format:check
+yarn format:check && yarn lint:check
