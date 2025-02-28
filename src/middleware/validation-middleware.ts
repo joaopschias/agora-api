@@ -8,7 +8,7 @@ import { ValidationError, validationResult } from 'express-validator';
  * @param res - Express response object.
  * @param next - Express next function.
  */
-export const validateRequest = (req: Request, res: Response, next: NextFunction): void => {
+export const validationMiddleware = (req: Request, res: Response, next: NextFunction): void => {
   const errors = validationResult(req);
 
   if (!errors.isEmpty()) {

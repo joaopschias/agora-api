@@ -1,12 +1,12 @@
 import 'reflect-metadata';
 
-import { corsMiddleware } from '@middleware/cors';
-import { errorHandler } from '@middleware/errorHandler';
-import { enforceJsonResponse } from '@middleware/jsonResponse';
-import { loggerMiddleware } from '@middleware/loggerMiddleware';
-import { notFoundHandler } from '@middleware/notFound';
+import { corsMiddleware } from '@middleware/cors-middleware';
+import { errorHandler } from '@middleware/error-handler';
+import { enforceJsonResponse } from '@middleware/json-response';
+import { loggerMiddleware } from '@middleware/logger-middleware';
+import { notFoundHandler } from '@middleware/not-found-handler';
 import routes from '@routes/index';
-import { Logger } from '@utils/logger';
+import { Logger } from '@utils/Logger';
 import config from 'config';
 import express from 'express';
 

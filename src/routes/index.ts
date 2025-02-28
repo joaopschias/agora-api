@@ -1,4 +1,4 @@
-import userRoutes from '@modules/user/routes/UserRoutes';
+import userRoutes from '@modules/user/routes/user.routes';
 import { Router } from 'express';
 
 import healthCheckRouter from './health.routes';

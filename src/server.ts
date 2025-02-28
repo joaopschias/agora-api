@@ -1,5 +1,5 @@
 import { AppDataSource } from '@infra/database/config';
-import { Logger } from '@utils/logger';
+import { Logger } from '@utils/Logger';
 import config from 'config';
 
 import app from './app';

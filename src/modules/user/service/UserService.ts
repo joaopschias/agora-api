@@ -1,4 +1,4 @@
-import { CreateUserDTO, UpdateUserDTO } from '@modules/user/dto/UserDTO';
+import { CreateUserDTO, UpdateUserDTO } from '@modules/user/dto/user.dto';
 import { User } from '@modules/user/entity/User';
 import { UserRepository } from '@modules/user/repository/UserRepository';
 import * as bcrypt from 'bcryptjs';

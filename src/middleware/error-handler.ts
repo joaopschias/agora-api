@@ -1,6 +1,6 @@
-import { BaseError } from '@errors/baseError';
-import { ERROR_CODE } from '@errors/errorCodes';
-import ILogger from '@interfaces/logger';
+import { BaseError } from '@errors/BaseError';
+import { ERROR_CODE } from '@errors/error-codes';
+import ILogger from '@interfaces/ILogger';
 import type { NextFunction, Request, Response } from 'express';
 
 export const errorHandler =

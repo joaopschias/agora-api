@@ -1,5 +1,5 @@
-import { BaseError } from '@errors/baseError';
-import { ERROR_CODE } from '@errors/errorCodes';
+import { BaseError } from '@errors/BaseError';
+import { ERROR_CODE } from '@errors/error-codes';
 
 export class ValidationError extends BaseError {
   constructor(

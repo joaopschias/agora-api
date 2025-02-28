@@ -1,4 +1,4 @@
-import ILogger from '@interfaces/logger';
+import ILogger from '@interfaces/ILogger';
 import { NextFunction, Request, Response } from 'express';
 import { pick } from 'lodash';
 

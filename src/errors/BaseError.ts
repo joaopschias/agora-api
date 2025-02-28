@@ -1,4 +1,4 @@
-import { ERROR_CODE } from './errorCodes';
+import { ERROR_CODE } from './error-codes';
 
 export class BaseError extends Error {
   name: string;

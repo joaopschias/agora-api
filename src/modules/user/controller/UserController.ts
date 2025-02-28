@@ -1,4 +1,4 @@
-import { CreateUserDTO, UpdateUserDTO } from '@modules/user/dto/UserDTO';
+import { CreateUserDTO, UpdateUserDTO } from '@modules/user/dto/user.dto';
 import { UserService } from '@modules/user/service/UserService';
 import { Request, Response } from 'express';
 

@@ -1,4 +1,4 @@
-import ILogger, { ILoggerConfig } from '@interfaces/logger';
+import ILogger, { ILoggerConfig } from '@interfaces/ILogger';
 import maskDeep from 'mask-deep';
 import winston from 'winston';
 
