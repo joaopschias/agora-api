@@ -1,139 +1,192 @@
 # Agora API
 
-## 🚀 Project Setup
+## 📌 Description
+Agora API is a scalable, well-structured RESTful API built with **TypeScript, Express, and TypeORM**. It includes features like authentication, user management, and database integration with **MariaDB**. The API is designed with **Domain-Driven Design (DDD)** principles to allow future scalability and potential migration to **microservices**.
 
-### **1️⃣ Install Dependencies**
-Ensure you have **Node.js** installed, then run:
+---
+
+## ⚙️ Requirements
+Before setting up the project, ensure you have the following installed:
+- [**Node.js (>=18.x)**](https://nodejs.org/)
+- [**Yarn (>=1.x)**](https://yarnpkg.com/)
+- [**Docker (>=20.x)**](https://www.docker.com/)
+- [**Docker Compose Plugin (>=2.0.0)**](https://docs.docker.com/compose/)
+
+---
+
+## 🚀 Quick Start
+
+### **1️⃣ Clone the Repository**
+```sh
+git clone https://github.com/joaopschias/agora-api.git && cd agora-api
+```
+
+### **2️⃣ Create the `.env` File**
+```sh
+cp .env.example .env
+```
+Edit the `.env` file and update necessary values.
+
+### **3️⃣ Install Dependencies**
 ```sh
 yarn install
 ```
 
-### **2️⃣ Run the Project**
-Start the development server:
+### **4️⃣ Start the Database**
+#### **Option 1: Run API & Database in Docker (Recommended)**
+```sh
+docker compose --profile dev up -d
+```
+This starts **both API & database inside Docker** for a fully containerized setup.
+
+#### **Option 2: Run Only the Database in Docker**
+```sh
+docker compose up --build -d agora-database
+```
+Then start the API locally:
 ```sh
 yarn dev
 ```
 
-### **3️⃣ Build for Production**
-To compile TypeScript to JavaScript:
+### **5️⃣ Run Database Migrations & Seeders**
 ```sh
-yarn build
+yarn typeorm migration:run
+```
+```sh
+yarn seed:run  # Optional, for test data
 ```
 
-### **4️⃣ Start Production Server**
+### **6️⃣ Start the API Server**
+#### Development Mode (Auto-restart on Changes)
 ```sh
-yarn start
+yarn dev
+```
+#### Production Mode
+```sh
+yarn build && yarn start
 ```
 
 ---
 
-## ✅ Code Quality & Formatting
+## 🛠 Essential Commands
+
+### **Project Lifecycle**
+- **Start in development mode (hot reload):**
+  ```sh
+  yarn dev
+  ```
+- **Build for production:**
+  ```sh
+  yarn build
+  ```
+- **Start production server:**
+  ```sh
+  yarn start
+  ```
+
+### **Database Management**
+- **Run all migrations:**
+  ```sh
+  yarn typeorm migration:run
+  ```
+- **Generate a new migration:**
+  ```sh
+  yarn typeorm migration:generate -d src/infra/database/config.ts src/infra/database/migrations/<migration-name>
+  ```
+- **Revert last migration:**
+  ```sh
+  yarn typeorm migration:revert
+  ```
+
+### **Seeding the Database**
+- **Run seeders:**
+  ```sh
+  yarn seed:run
+  ```
+- **Create a new seed file:**
+  ```sh
+  yarn seed:create
+  ```
 
 ### **Linting & Formatting**
-To check for linting errors:
-```sh
-yarn lint:check
-```
-To fix linting issues automatically:
-```sh
-yarn lint:fix
-```
+- **Check linting issues:**
+  ```sh
+  yarn lint:check
+  ```
+- **Fix linting issues:**
+  ```sh
+  yarn lint:fix
+  ```
+- **Check code formatting:**
+  ```sh
+  yarn format:check
+  ```
+- **Auto-format files:**
+  ```sh
+  yarn format:fix
+  ```
 
-To check formatting:
+### **Pre-Commit Hook (Husky)**
+Ensures **linting & formatting checks before every commit**.
+If commit is rejected:
 ```sh
-yarn format:check
+ yarn format:fix && yarn lint:fix
 ```
-To auto-format files:
-```sh
-yarn format:fix
-```
-
----
-
-## 🔄 Pre-Commit Hook (Husky)
-
-This project uses **Husky** to enforce linting and formatting before commits.
-If your commit is rejected, run:
-```sh
-yarn lint:fix && yarn format:fix
-```
-Then retry the commit:
+Then retry:
 ```sh
 git commit -am "your message"
 ```
 
 ---
 
-## 🐳 Running with Docker
+## 🐳 Docker Cheat Sheet
 
-To run the project using Docker, follow these steps:
-
-We use this method to separate concerns between the **database** and the **application** itself. This allows the MySQL database to run in a container while developing the application locally, enabling live reload for faster development cycles. This approach provides **flexibility** and **efficiency** during development.
-
-> **Note:** If you are using an older version of Docker (before version **20.x** or without the **Docker Compose plugin**), the command `docker compose` may not work. In that case, use `docker-compose` instead. Ensure your Docker version is **up-to-date** to avoid compatibility issues.
-
-### **1️⃣ Start MySQL using Docker Compose**
-```sh
-docker compose up -d agora-mysql
-```
-
-### **2️⃣ Run the API Locally with Docker MySQL**
-Ensure your **.env** file has the correct database connection settings, then start the server:
-```sh
-yarn dev
-```
-
-### **3️⃣ Start All Services (API + MySQL) using Docker**
-#### Development Mode:
-```sh
-docker compose --profile dev up -d
-```
-
-#### Production Mode:
-```sh
-docker compose --profile prod up -d
-```
-
-### **4️⃣ Stop & Remove Containers**
-#### Stop & Remove Dev Containers:
-```sh
-docker compose --profile dev down
-```
-#### Stop & Remove Prod Containers:
-```sh
-docker compose --profile prod down
-```
-
-### **5️⃣ Checking Running Containers**
-```sh
-docker ps
-```
-
-### **6️⃣ Viewing Logs**
-#### View API Logs:
-```sh
-docker logs agora-api-dev -f
-```
-#### View Database Logs:
-```sh
-docker logs agora-mysql -f
-```
+- **Start all services (API + Database) in development mode:**
+  ```sh
+  docker compose --profile dev up -d --build
+  ```
+- **Start only the database:**
+  ```sh
+  docker compose up --build -d agora-database
+  ```
+- **Stop & remove all containers (Dev Mode):**
+  ```sh
+  docker compose --profile dev down
+  ```
+- **Check running containers:**
+  ```sh
+  docker ps
+  ```
+- **View API logs:**
+  ```sh
+  docker logs agora-api-dev -f
+  ```
+- **Stop all running containers:**
+  ```sh
+  docker stop $(docker ps -q)
+  ```
+- **Remove all stopped containers:**
+  ```sh
+  docker rm $(docker ps -a -q)
+  ```
+- **Remove all images:**
+  ```sh
+  docker rmi $(docker images -q)
+  ```
+- **Clean up unused containers, networks, and volumes:**
+  ```sh
+  docker system prune -a --volumes
+  ```
+- **View logs of a container:**
+  ```sh
+  docker logs <container_id>
+  ```
 
 ---
 
-## 🎯 API Endpoints
+## 📖 Conclusion
+This README provides a complete guide to setting up and running the Agora API. Whether running locally or inside Docker, the steps ensure a smooth development experience.
 
-### **Health Check**
-```sh
-curl -i http://localhost:3000/api/health
-```
+If you have any questions or issues, feel free to reach out.
 
-### **Test Database Connection**
-```sh
-curl -i http://localhost:3000/api/db-check
-```
-
-
----
-
-Happy coding! 🚀
+**Happy coding! 🚀**
