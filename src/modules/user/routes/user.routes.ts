@@ -1,3 +1,4 @@
+import { validatePagination } from '@middleware/pagination-middleware';
 import { validationMiddleware } from '@middleware/validation-middleware';
 import { UserController } from '@modules/user/controller/UserController';
 import {
@@ -11,7 +12,7 @@ import { Request, Response, Router } from 'express';
 const router = Router();
 const userController = new UserController();
 
-router.get('/', async (req: Request, res: Response) => {
+router.get('/', validatePagination, async (req: Request, res: Response) => {
   await userController.all(req, res);
 });
 

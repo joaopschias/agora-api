@@ -1,5 +1,6 @@
 import { AppDataSource } from '@infra/database/config';
 import { User } from '@modules/user/entity/User';
+import { paginate, PaginatedResult, PaginationOptions } from '@utils/pagination';
 import { Repository } from 'typeorm';
 
 import { IUserRepository } from './IUserRepository';
@@ -19,12 +20,13 @@ export class UserRepository implements IUserRepository {
   }
 
   /**
-   * Retrieves all users from the database.
+   * Retrieves paginated users from the database.
    *
-   * @returns {Promise<User[]>} - A list of all users.
+   * @param {PaginationOptions} options - Pagination options.
+   * @returns {Promise<PaginatedResult<User>>} - Paginated list of users.
    */
-  async findAll(): Promise<User[]> {
-    return await this.repo.find();
+  async findAll(options: PaginationOptions): Promise<PaginatedResult<User>> {
+    return await paginate(this.repo, options);
   }
 
   /**

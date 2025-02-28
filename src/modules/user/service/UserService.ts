@@ -1,6 +1,7 @@
 import { CreateUserDTO, UpdateUserDTO } from '@modules/user/dto/user.dto';
 import { User } from '@modules/user/entity/User';
 import { UserRepository } from '@modules/user/repository/UserRepository';
+import { PaginatedResult, PaginationOptions } from '@utils/pagination';
 import * as bcrypt from 'bcryptjs';
 
 export class UserService {
@@ -15,12 +16,13 @@ export class UserService {
   }
 
   /**
-   * Retrieves all users.
+   * Retrieves paginated users.
    *
-   * @returns {Promise<User[]>} - List of all users.
+   * @param {PaginationOptions} options - Pagination options.
+   * @returns {Promise<PaginatedResult<User>>} - Paginated list of users.
    */
-  async all(): Promise<User[]> {
-    return this.userRepository.findAll();
+  async all(options: PaginationOptions): Promise<PaginatedResult<User>> {
+    return this.userRepository.findAll(options);
   }
 
   /**
@@ -37,9 +39,7 @@ export class UserService {
     }
 
     const hashedPassword = await bcrypt.hash(data.password, 10);
-    const user = await this.userRepository.create({ ...data, password: hashedPassword });
-
-    return user;
+    return await this.userRepository.create({ ...data, password: hashedPassword });
   }
 
   /**
