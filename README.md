@@ -139,6 +139,67 @@ git commit -am "your message"
 
 ---
 
+### 📚 **Project Structure & Naming Conventions**
+
+To maintain **code consistency and clarity**, follow these **file naming conventions** across the project.
+
+#### **📌 General Naming Rules**
+- **PascalCase** (`MyClass.ts`) → Used for **Classes, Interfaces, and Entities**.
+- **kebab-case** (`my-file.ts`) → Used for **routes, config files, middleware functions, migrations, seeders, and factories**.
+- **camelCase** (`myVariable`) → Used for **variables and function names** inside files.
+
+#### **📚 Folder & File Structure**
+```
+src/
+│── infra/
+│   ├── database/
+│   │   ├── migrations/ (kebab-case → `create-user-table.ts`)
+│   │   ├── seeds/ (kebab-case → `user.seeder.ts`)
+│   │   ├── factories/ (kebab-case → `user.factory.ts`)
+│   │   ├── config.ts (kebab-case → Configuration file)
+│── middleware/
+│   ├── cors-middleware.ts (kebab-case → Function)
+│   ├── error-handler.ts (kebab-case → Function)
+│   ├── json-response.ts (kebab-case → Function)
+│   ├── logger-middleware.ts (kebab-case → Function)
+│   ├── pagination-middleware.ts (kebab-case → Function)
+│   ├── validation-middleware.ts (kebab-case → Function)
+│── modules/
+│   ├── user/
+│   │   ├── entity/ (PascalCase → `User.ts`)
+│   │   ├── dto/ (kebab-case → `user.dto.ts`)
+│   │   ├── repository/ (PascalCase for Classes, Prefix `I` for Interfaces)
+│   │   │   ├── IUserRepository.ts (PascalCase → Interface)
+│   │   │   ├── UserRepository.ts (PascalCase → Class)
+│   │   ├── service/ (PascalCase → `UserService.ts`)
+│   │   ├── controller/ (PascalCase → `UserController.ts`)
+│   │   ├── validation/ (kebab-case → `user.validation.ts`)
+│   │   ├── routes/ (kebab-case → `user.routes.ts`)
+│── routes/
+│   ├── health.routes.ts (kebab-case → Route file)
+│   ├── index.ts (Entry point)
+│   ├── root.routes.ts (kebab-case → Route file)
+│── utils/
+│   ├── Logger.ts (PascalCase → Class)
+│   ├── pagination.ts (kebab-case → Function)
+│── interfaces/
+│   ├── ILogger.ts (PascalCase → Interface)
+│── errors/
+│   ├── BaseError.ts (PascalCase → Class)
+│   ├── ValidationError.ts (PascalCase → Class)
+│   ├── error-codes.ts (kebab-case → Constants)
+│── types/
+│   ├── mask-deep/
+│   │   ├── index.d.ts (TypeScript Declarations)
+```
+
+#### **📌 Why These Conventions?**
+✅ **Consistency** – Easy to navigate and maintain.  
+✅ **Readability** – Clear distinction between different types of files.  
+✅ **Scalability** – New modules follow the same structure without confusion.
+
+---
+
 ## 🐳 Docker Cheat Sheet
 
 - **Start all services (API + Database) in development mode:**
